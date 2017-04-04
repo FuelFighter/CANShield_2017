@@ -85,7 +85,7 @@ int main(void){
 				parseIndex = (parseIndex + 1) % RX_BUFFER_SIZE;
 				canId += ascii_to_dec(uartRxBuffer[parseIndex]);
 				parseIndex = (parseIndex + 1) % RX_BUFFER_SIZE;
-				printf("CAN id: %03X\n",canId);
+				//printf("CAN id: %03X\n",canId);
 				txFrame.id = canId;
 				
 				//Jump over :
@@ -95,7 +95,7 @@ int main(void){
 				txFrame.length = ascii_to_dec(uartRxBuffer[parseIndex]);
 				parseIndex = (parseIndex+1) % RX_BUFFER_SIZE;
 				
-				printf("CAN Length: %u\n",txFrame.length);
+				//printf("CAN Length: %u\n",txFrame.length);
 				
 				//Jump over :
 				parseIndex = (parseIndex+1) % RX_BUFFER_SIZE;
@@ -110,7 +110,7 @@ int main(void){
 					parseIndex = (parseIndex+1) % RX_BUFFER_SIZE;
 					
 					txFrame.data[i] = canData;
-					printf("Can Data %d: %02X\n", i, txFrame.data[i]);
+					//printf("Can Data %d: %02X\n", i, txFrame.data[i]);
 				}
 				
 				//Jump over ]
