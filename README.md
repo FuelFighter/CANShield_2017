@@ -4,7 +4,7 @@ from a computer or Raspberry Pi to the CANbus of the FuelFighter vehicle.
 
 To use the shield you must format your messages in a certain way. 
 It is only built to receive and transmit CAN-messages. 
-A CAN-message has an ID field, Length of message field and 8bytes of date. 
+A CAN-message has an ID field, Length of message field and 8bytes of data. 
 
 The message format should be on this form:
 "[7FF:8:CAFEBABE12345678]\n" 
@@ -17,6 +17,7 @@ the message.
 
 The second information is the length of the packet. This can be from 0 to 8. 
 The rest of the message can go from blank if the length is 0, to FFFFFFFFFFFFFFFF if the length is 8.
+Allways include the colons, ':', even if the data field is blank.
 
 The messages must be transmittet as ASCII characters.
 
