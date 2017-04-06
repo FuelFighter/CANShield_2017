@@ -31,12 +31,12 @@ void handling_error();
 int main(void){
 	cli();
 	usbdbg_init();
-	can_init();
+	can_init(0,0);
 	sei();
 	
 	while (1)
 	{
-		if (can_read_message(&rxFrame))
+		if (can_read_message_if_new(&rxFrame))
 		{
 			int index = 0;
 			index += sprintf(uartTxBuffer, "[%03X:%d:", rxFrame.id, rxFrame.length);
