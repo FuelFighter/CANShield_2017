@@ -63,12 +63,12 @@ int main(void){
 				parseIndex = (parseIndex + 1) % RX_BUFFER_SIZE;
 				if (errorIncrement == RX_BUFFER_SIZE)
 				{
-					printf("ERROR, Could not find start of CANmessage in uartRxBuffer\n");
+					printf("ER02\n");
 					handling_error();
 					break;
 				} else if (errorIncrement > 1)
 				{
-					printf("ERROR, Looking for [, increment: %u\n", errorIncrement-1);
+					printf("ER01:%u\n", errorIncrement-1);
 				}
 				errorIncrement++;
 			}
