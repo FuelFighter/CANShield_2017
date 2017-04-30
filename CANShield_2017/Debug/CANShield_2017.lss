@@ -3,31 +3,31 @@ CANShield_2017.elf:     file format elf32-avr
 
 Sections:
 Idx Name          Size      VMA       LMA       File off  Algn
-  0 .data         00000078  00800100  000012a4  00001338  2**0
+  0 .data         00000026  00800100  000012a4  00001338  2**0
                   CONTENTS, ALLOC, LOAD, DATA
   1 .text         000012a4  00000000  00000000  00000094  2**1
                   CONTENTS, ALLOC, LOAD, READONLY, CODE
-  2 .bss          00000287  00800178  00800178  000013b0  2**0
+  2 .bss          00000287  00800126  00800126  0000135e  2**0
                   ALLOC
-  3 .comment      0000005c  00000000  00000000  000013b0  2**0
+  3 .comment      0000005c  00000000  00000000  0000135e  2**0
                   CONTENTS, READONLY
-  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  0000140c  2**2
+  4 .note.gnu.avr.deviceinfo 00000040  00000000  00000000  000013bc  2**2
                   CONTENTS, READONLY
-  5 .debug_aranges 000000a0  00000000  00000000  0000144c  2**0
+  5 .debug_aranges 000000a0  00000000  00000000  000013fc  2**0
                   CONTENTS, READONLY, DEBUGGING
-  6 .debug_info   000014b3  00000000  00000000  000014ec  2**0
+  6 .debug_info   000014b3  00000000  00000000  0000149c  2**0
                   CONTENTS, READONLY, DEBUGGING
-  7 .debug_abbrev 00000eec  00000000  00000000  0000299f  2**0
+  7 .debug_abbrev 00000eec  00000000  00000000  0000294f  2**0
                   CONTENTS, READONLY, DEBUGGING
-  8 .debug_line   0000096e  00000000  00000000  0000388b  2**0
+  8 .debug_line   0000096e  00000000  00000000  0000383b  2**0
                   CONTENTS, READONLY, DEBUGGING
-  9 .debug_frame  000001bc  00000000  00000000  000041fc  2**2
+  9 .debug_frame  000001bc  00000000  00000000  000041ac  2**2
                   CONTENTS, READONLY, DEBUGGING
- 10 .debug_str    0000077f  00000000  00000000  000043b8  2**0
+ 10 .debug_str    0000077f  00000000  00000000  00004368  2**0
                   CONTENTS, READONLY, DEBUGGING
- 11 .debug_loc    000007ab  00000000  00000000  00004b37  2**0
+ 11 .debug_loc    000007ab  00000000  00000000  00004ae7  2**0
                   CONTENTS, READONLY, DEBUGGING
- 12 .debug_ranges 000000a0  00000000  00000000  000052e2  2**0
+ 12 .debug_ranges 000000a0  00000000  00000000  00005292  2**0
                   CONTENTS, READONLY, DEBUGGING
 
 Disassembly of section .text:
@@ -127,13 +127,13 @@ Disassembly of section .text:
       ae:	02 c0       	rjmp	.+4      	; 0xb4 <__do_copy_data+0x14>
       b0:	07 90       	elpm	r0, Z+
       b2:	0d 92       	st	X+, r0
-      b4:	a8 37       	cpi	r26, 0x78	; 120
+      b4:	a6 32       	cpi	r26, 0x26	; 38
       b6:	b1 07       	cpc	r27, r17
       b8:	d9 f7       	brne	.-10     	; 0xb0 <__do_copy_data+0x10>
 
 000000ba <__do_clear_bss>:
       ba:	23 e0       	ldi	r18, 0x03	; 3
-      bc:	a8 e7       	ldi	r26, 0x78	; 120
+      bc:	a6 e2       	ldi	r26, 0x26	; 38
       be:	b1 e0       	ldi	r27, 0x01	; 1
       c0:	01 c0       	rjmp	.+2      	; 0xc4 <.do_clear_bss_start>
 
@@ -141,7 +141,7 @@ Disassembly of section .text:
       c2:	1d 92       	st	X+, r1
 
 000000c4 <.do_clear_bss_start>:
-      c4:	af 3f       	cpi	r26, 0xFF	; 255
+      c4:	ad 3a       	cpi	r26, 0xAD	; 173
       c6:	b2 07       	cpc	r27, r18
       c8:	e1 f7       	brne	.-8      	; 0xc2 <.do_clear_bss_loop>
       ca:	8c d2       	rcall	.+1304   	; 0x5e4 <main>
@@ -205,8 +205,8 @@ ISR(CANIT_vect)
      120:	80 83       	st	Z, r24
 
 		if (tx_on != tx_off) {
-     122:	80 91 7d 01 	lds	r24, 0x017D	; 0x80017d <tx_off>
-     126:	90 91 7c 01 	lds	r25, 0x017C	; 0x80017c <tx_on>
+     122:	80 91 2b 01 	lds	r24, 0x012B	; 0x80012b <tx_off>
+     126:	90 91 2a 01 	lds	r25, 0x012A	; 0x80012a <tx_on>
      12a:	98 17       	cp	r25, r24
      12c:	89 f1       	breq	.+98     	; 0x190 <__vector_18+0xbe>
 			unsigned char pos;
@@ -219,8 +219,8 @@ ISR(CANIT_vect)
      134:	c0 01       	movw	r24, r0
      136:	11 24       	eor	r1, r1
      138:	fc 01       	movw	r30, r24
-     13a:	e2 5d       	subi	r30, 0xD2	; 210
-     13c:	fd 4f       	sbci	r31, 0xFD	; 253
+     13a:	e4 52       	subi	r30, 0x24	; 36
+     13c:	fe 4f       	sbci	r31, 0xFE	; 254
      13e:	20 81       	ld	r18, Z
      140:	20 93 f0 00 	sts	0x00F0, r18	; 0x8000f0 <__TEXT_REGION_LENGTH__+0x7e00f0>
 			CANIDT2 = tx_frames[pos].array[0];
@@ -261,20 +261,20 @@ ISR(CANIT_vect)
 			//set length and request send
 			CANCDMOB = (1 << CONMOB0) | tx_frames[pos].length;
      174:	fc 01       	movw	r30, r24
-     176:	e0 5d       	subi	r30, 0xD0	; 208
-     178:	fd 4f       	sbci	r31, 0xFD	; 253
+     176:	e2 52       	subi	r30, 0x22	; 34
+     178:	fe 4f       	sbci	r31, 0xFE	; 254
      17a:	80 81       	ld	r24, Z
      17c:	8f 70       	andi	r24, 0x0F	; 15
      17e:	80 64       	ori	r24, 0x40	; 64
      180:	80 93 ef 00 	sts	0x00EF, r24	; 0x8000ef <__TEXT_REGION_LENGTH__+0x7e00ef>
 			tx_off++;
-     184:	80 91 7d 01 	lds	r24, 0x017D	; 0x80017d <tx_off>
+     184:	80 91 2b 01 	lds	r24, 0x012B	; 0x80012b <tx_off>
      188:	8f 5f       	subi	r24, 0xFF	; 255
-     18a:	80 93 7d 01 	sts	0x017D, r24	; 0x80017d <tx_off>
+     18a:	80 93 2b 01 	sts	0x012B, r24	; 0x80012b <tx_off>
      18e:	7d c0       	rjmp	.+250    	; 0x28a <__vector_18+0x1b8>
 		} else {
 			tx_busy = 0;
-     190:	10 92 7b 01 	sts	0x017B, r1	; 0x80017b <tx_busy>
+     190:	10 92 29 01 	sts	0x0129, r1	; 0x800129 <tx_busy>
      194:	7a c0       	rjmp	.+244    	; 0x28a <__vector_18+0x1b8>
 		}
 	}
@@ -290,10 +290,10 @@ ISR(CANIT_vect)
      1a2:	80 e1       	ldi	r24, 0x10	; 16
      1a4:	80 93 ed 00 	sts	0x00ED, r24	; 0x8000ed <__TEXT_REGION_LENGTH__+0x7e00ed>
 		if (((rx_on - rx_off) & RX_ABS_MASK) < RX_SIZE) {
-     1a8:	80 91 79 01 	lds	r24, 0x0179	; 0x800179 <rx_on>
+     1a8:	80 91 27 01 	lds	r24, 0x0127	; 0x800127 <rx_on>
      1ac:	28 2f       	mov	r18, r24
      1ae:	30 e0       	ldi	r19, 0x00	; 0
-     1b0:	90 91 7a 01 	lds	r25, 0x017A	; 0x80017a <rx_off>
+     1b0:	90 91 28 01 	lds	r25, 0x0128	; 0x800128 <rx_off>
      1b4:	29 1b       	sub	r18, r25
      1b6:	31 09       	sbc	r19, r1
      1b8:	2f 77       	andi	r18, 0x7F	; 127
@@ -315,7 +315,7 @@ ISR(CANIT_vect)
      1d2:	e4 9f       	mul	r30, r20
      1d4:	f0 01       	movw	r30, r0
      1d6:	11 24       	eor	r1, r1
-     1d8:	e2 58       	subi	r30, 0x82	; 130
+     1d8:	e4 5d       	subi	r30, 0xD4	; 212
      1da:	fe 4f       	sbci	r31, 0xFE	; 254
      1dc:	9f 70       	andi	r25, 0x0F	; 15
      1de:	42 81       	ldd	r20, Z+2	; 0x02
@@ -363,7 +363,7 @@ ISR(CANIT_vect)
      21e:	92 87       	std	Z+10, r25	; 0x0a
 			rx_on++;
      220:	8f 5f       	subi	r24, 0xFF	; 255
-     222:	80 93 79 01 	sts	0x0179, r24	; 0x800179 <rx_on>
+     222:	80 93 27 01 	sts	0x0127, r24	; 0x800127 <rx_on>
 
 			// Reset if reset can message
 			if(rx_frames[pos].id == 0x000 && rx_frames[pos].data[0] == 0x03){
@@ -390,7 +390,7 @@ ISR(CANIT_vect)
      24e:	83 9f       	mul	r24, r19
      250:	f0 0d       	add	r31, r0
      252:	11 24       	eor	r1, r1
-     254:	e2 58       	subi	r30, 0x82	; 130
+     254:	e4 5d       	subi	r30, 0xD4	; 212
      256:	fe 4f       	sbci	r31, 0xFE	; 254
      258:	83 81       	ldd	r24, Z+3	; 0x03
      25a:	83 30       	cpi	r24, 0x03	; 3
@@ -562,7 +562,7 @@ void can_init(uint16_t accept_mask_id, uint16_t accept_tag_id) {
      352:	80 83       	st	Z, r24
 
 	reset = 0;
-     354:	10 92 78 01 	sts	0x0178, r1	; 0x800178 <__data_end>
+     354:	10 92 26 01 	sts	0x0126, r1	; 0x800126 <__data_end>
 }
      358:	df 91       	pop	r29
      35a:	cf 91       	pop	r28
@@ -576,8 +576,8 @@ bool can_read_message_if_new(CanMessage_t* message) {
      362:	ec 01       	movw	r28, r24
 	// Check if there is a new message
 	if (rx_on == rx_off) {
-     364:	40 91 7a 01 	lds	r20, 0x017A	; 0x80017a <rx_off>
-     368:	20 91 79 01 	lds	r18, 0x0179	; 0x800179 <rx_on>
+     364:	40 91 28 01 	lds	r20, 0x0128	; 0x800128 <rx_off>
+     368:	20 91 27 01 	lds	r18, 0x0127	; 0x800127 <rx_on>
      36c:	24 17       	cp	r18, r20
      36e:	89 f1       	breq	.+98     	; 0x3d2 <can_read_message_if_new+0x74>
 		return false;
@@ -594,7 +594,7 @@ bool can_read_message_if_new(CanMessage_t* message) {
      378:	b0 01       	movw	r22, r0
      37a:	11 24       	eor	r1, r1
      37c:	fb 01       	movw	r30, r22
-     37e:	e2 58       	subi	r30, 0x82	; 130
+     37e:	e4 5d       	subi	r30, 0xD4	; 212
      380:	fe 4f       	sbci	r31, 0xFE	; 254
      382:	20 81       	ld	r18, Z
      384:	22 95       	swap	r18
@@ -613,7 +613,7 @@ bool can_read_message_if_new(CanMessage_t* message) {
      39e:	39 83       	std	Y+1, r19	; 0x01
 	message->length = frame->length;
      3a0:	fb 01       	movw	r30, r22
-     3a2:	e0 58       	subi	r30, 0x80	; 128
+     3a2:	e2 5d       	subi	r30, 0xD2	; 210
      3a4:	fe 4f       	sbci	r31, 0xFE	; 254
      3a6:	20 81       	ld	r18, Z
      3a8:	2f 70       	andi	r18, 0x0F	; 15
@@ -622,7 +622,7 @@ bool can_read_message_if_new(CanMessage_t* message) {
      3ac:	22 23       	and	r18, r18
      3ae:	99 f0       	breq	.+38     	; 0x3d6 <can_read_message_if_new+0x78>
      3b0:	db 01       	movw	r26, r22
-     3b2:	af 57       	subi	r26, 0x7F	; 127
+     3b2:	a1 5d       	subi	r26, 0xD1	; 209
      3b4:	be 4f       	sbci	r27, 0xFE	; 254
      3b6:	fe 01       	movw	r30, r28
      3b8:	33 96       	adiw	r30, 0x03	; 3
@@ -660,7 +660,7 @@ bool can_read_message_if_new(CanMessage_t* message) {
 	if (rx_on != rx_off) {
 		rx_off++;
      3d6:	4f 5f       	subi	r20, 0xFF	; 255
-     3d8:	40 93 7a 01 	sts	0x017A, r20	; 0x80017a <rx_off>
+     3d8:	40 93 28 01 	sts	0x0128, r20	; 0x800128 <rx_off>
 	}
 
 	return true;
@@ -686,7 +686,7 @@ bool can_send_message(CanMessage_t* message) {
      3f2:	8c 93       	st	X, r24
 
 	if (!tx_busy) {
-     3f4:	80 91 7b 01 	lds	r24, 0x017B	; 0x80017b <tx_busy>
+     3f4:	80 91 29 01 	lds	r24, 0x0129	; 0x800129 <tx_busy>
      3f8:	81 11       	cpse	r24, r1
      3fa:	27 c0       	rjmp	.+78     	; 0x44a <__LOCK_REGION_LENGTH__+0x4a>
 		// Switch to Mob 0 access
@@ -738,7 +738,7 @@ bool can_send_message(CanMessage_t* message) {
 		result = true;
 		tx_busy = 1;
      438:	81 e0       	ldi	r24, 0x01	; 1
-     43a:	80 93 7b 01 	sts	0x017B, r24	; 0x80017b <tx_busy>
+     43a:	80 93 29 01 	sts	0x0129, r24	; 0x800129 <tx_busy>
 
 		// Set length, start send which restarts tx interrupt
 		CANCDMOB = (1 << CONMOB0) | message->length;
@@ -759,10 +759,10 @@ bool can_send_message(CanMessage_t* message) {
 		CANCDMOB = (1 << CONMOB0) | message->length;
 	}
 	else if (TX_SIZE - ((tx_on - tx_off) & TX_ABS_MASK)) {
-     44a:	20 91 7c 01 	lds	r18, 0x017C	; 0x80017c <tx_on>
+     44a:	20 91 2a 01 	lds	r18, 0x012A	; 0x80012a <tx_on>
      44e:	82 2f       	mov	r24, r18
      450:	90 e0       	ldi	r25, 0x00	; 0
-     452:	30 91 7d 01 	lds	r19, 0x017D	; 0x80017d <tx_off>
+     452:	30 91 2b 01 	lds	r19, 0x012B	; 0x80012b <tx_off>
      456:	83 1b       	sub	r24, r19
      458:	91 09       	sbc	r25, r1
      45a:	8f 77       	andi	r24, 0x7F	; 127
@@ -778,8 +778,8 @@ bool can_send_message(CanMessage_t* message) {
      46a:	d0 01       	movw	r26, r0
      46c:	11 24       	eor	r1, r1
      46e:	ed 01       	movw	r28, r26
-     470:	c2 5d       	subi	r28, 0xD2	; 210
-     472:	dd 4f       	sbci	r29, 0xFD	; 253
+     470:	c4 52       	subi	r28, 0x24	; 36
+     472:	de 4f       	sbci	r29, 0xFE	; 254
      474:	80 81       	ld	r24, Z
      476:	38 2f       	mov	r19, r24
      478:	32 95       	swap	r19
@@ -807,8 +807,8 @@ bool can_send_message(CanMessage_t* message) {
      4a2:	89 2b       	or	r24, r25
      4a4:	8a 83       	std	Y+2, r24	; 0x02
 		memcpy(tx_frames[tx_on & (TX_SIZE-1)].data, message->data, CAN_FRAME_DATA_MAX_LENGTH);
-     4a6:	af 5c       	subi	r26, 0xCF	; 207
-     4a8:	bd 4f       	sbci	r27, 0xFD	; 253
+     4a6:	a1 52       	subi	r26, 0x21	; 33
+     4a8:	be 4f       	sbci	r27, 0xFE	; 254
      4aa:	88 e0       	ldi	r24, 0x08	; 8
      4ac:	33 96       	adiw	r30, 0x03	; 3
      4ae:	01 90       	ld	r0, Z+
@@ -822,7 +822,7 @@ bool can_send_message(CanMessage_t* message) {
 
 		tx_on++;
      4b6:	2f 5f       	subi	r18, 0xFF	; 255
-     4b8:	20 93 7c 01 	sts	0x017C, r18	; 0x80017c <tx_on>
+     4b8:	20 93 2a 01 	sts	0x012A, r18	; 0x80012a <tx_on>
 		result = true;
      4bc:	81 e0       	ldi	r24, 0x01	; 1
      4be:	01 c0       	rjmp	.+2      	; 0x4c2 <__LOCK_REGION_LENGTH__+0xc2>
@@ -940,10 +940,10 @@ ISR(USART0_RX_vect){
      53a:	e9 df       	rcall	.-46     	; 0x50e <usbdbg_rx_char>
      53c:	48 2f       	mov	r20, r24
 	uartRxBuffer[rxIndex] = rxChar;
-     53e:	20 91 e3 02 	lds	r18, 0x02E3	; 0x8002e3 <rxIndex>
-     542:	30 91 e4 02 	lds	r19, 0x02E4	; 0x8002e4 <rxIndex+0x1>
+     53e:	20 91 91 02 	lds	r18, 0x0291	; 0x800291 <rxIndex>
+     542:	30 91 92 02 	lds	r19, 0x0292	; 0x800292 <rxIndex+0x1>
      546:	f9 01       	movw	r30, r18
-     548:	e0 51       	subi	r30, 0x10	; 16
+     548:	e2 56       	subi	r30, 0x62	; 98
      54a:	fd 4f       	sbci	r31, 0xFD	; 253
      54c:	80 83       	st	Z, r24
 	rxIndex = (rxIndex + 1) % RX_BUFFER_SIZE;
@@ -952,19 +952,19 @@ ISR(USART0_RX_vect){
      552:	68 ec       	ldi	r22, 0xC8	; 200
      554:	70 e0       	ldi	r23, 0x00	; 0
      556:	d9 d1       	rcall	.+946    	; 0x90a <__divmodhi4>
-     558:	90 93 e4 02 	sts	0x02E4, r25	; 0x8002e4 <rxIndex+0x1>
-     55c:	80 93 e3 02 	sts	0x02E3, r24	; 0x8002e3 <rxIndex>
+     558:	90 93 92 02 	sts	0x0292, r25	; 0x800292 <rxIndex+0x1>
+     55c:	80 93 91 02 	sts	0x0291, r24	; 0x800291 <rxIndex>
 	
 	if (rxChar == '\n')
      560:	4a 30       	cpi	r20, 0x0A	; 10
      562:	49 f4       	brne	.+18     	; 0x576 <__vector_21+0x62>
 	{	
 		newUartMessages++;
-     564:	80 91 df 02 	lds	r24, 0x02DF	; 0x8002df <newUartMessages>
-     568:	90 91 e0 02 	lds	r25, 0x02E0	; 0x8002e0 <newUartMessages+0x1>
+     564:	80 91 8d 02 	lds	r24, 0x028D	; 0x80028d <newUartMessages>
+     568:	90 91 8e 02 	lds	r25, 0x028E	; 0x80028e <newUartMessages+0x1>
      56c:	01 96       	adiw	r24, 0x01	; 1
-     56e:	90 93 e0 02 	sts	0x02E0, r25	; 0x8002e0 <newUartMessages+0x1>
-     572:	80 93 df 02 	sts	0x02DF, r24	; 0x8002df <newUartMessages>
+     56e:	90 93 8e 02 	sts	0x028E, r25	; 0x80028e <newUartMessages+0x1>
+     572:	80 93 8d 02 	sts	0x028D, r24	; 0x80028d <newUartMessages>
 	}
 }
      576:	ff 91       	pop	r31
@@ -1037,15 +1037,15 @@ uint8_t ascii_to_dec(char c)
 
 void handling_error(){
 	error++;
-     5c6:	80 91 de 02 	lds	r24, 0x02DE	; 0x8002de <error>
+     5c6:	80 91 8c 02 	lds	r24, 0x028C	; 0x80028c <error>
      5ca:	8f 5f       	subi	r24, 0xFF	; 255
-     5cc:	80 93 de 02 	sts	0x02DE, r24	; 0x8002de <error>
+     5cc:	80 93 8c 02 	sts	0x028C, r24	; 0x80028c <error>
 	newUartMessages--;
-     5d0:	80 91 df 02 	lds	r24, 0x02DF	; 0x8002df <newUartMessages>
-     5d4:	90 91 e0 02 	lds	r25, 0x02E0	; 0x8002e0 <newUartMessages+0x1>
+     5d0:	80 91 8d 02 	lds	r24, 0x028D	; 0x80028d <newUartMessages>
+     5d4:	90 91 8e 02 	lds	r25, 0x028E	; 0x80028e <newUartMessages+0x1>
      5d8:	01 97       	sbiw	r24, 0x01	; 1
-     5da:	90 93 e0 02 	sts	0x02E0, r25	; 0x8002e0 <newUartMessages+0x1>
-     5de:	80 93 df 02 	sts	0x02DF, r24	; 0x8002df <newUartMessages>
+     5da:	90 93 8e 02 	sts	0x028E, r25	; 0x80028e <newUartMessages+0x1>
+     5de:	80 93 8d 02 	sts	0x028D, r24	; 0x80028d <newUartMessages>
      5e2:	08 95       	ret
 
 000005e4 <main>:
@@ -1079,7 +1079,7 @@ int main(void){
 	{
 		if (can_read_message_if_new(&rxFrame))
      602:	0f 2e       	mov	r0, r31
-     604:	f5 ee       	ldi	r31, 0xE5	; 229
+     604:	f3 e9       	ldi	r31, 0x93	; 147
      606:	af 2e       	mov	r10, r31
      608:	f2 e0       	ldi	r31, 0x02	; 2
      60a:	bf 2e       	mov	r11, r31
@@ -1088,7 +1088,7 @@ int main(void){
 			int index = 0;
 			index += sprintf(uartTxBuffer, "[%03X:%d:", rxFrame.id, rxFrame.length);
      60e:	0f 2e       	mov	r0, r31
-     610:	f8 eb       	ldi	r31, 0xB8	; 184
+     610:	f6 e6       	ldi	r31, 0x66	; 102
      612:	2f 2e       	mov	r2, r31
      614:	f3 e0       	ldi	r31, 0x03	; 3
      616:	3f 2e       	mov	r3, r31
@@ -1183,7 +1183,7 @@ int main(void){
      68a:	88 23       	and	r24, r24
      68c:	59 f1       	breq	.+86     	; 0x6e4 <main+0x100>
      68e:	0f 2e       	mov	r0, r31
-     690:	f8 ee       	ldi	r31, 0xE8	; 232
+     690:	f6 e9       	ldi	r31, 0x96	; 150
      692:	ef 2e       	mov	r14, r31
      694:	f2 e0       	ldi	r31, 0x02	; 2
      696:	ff 2e       	mov	r15, r31
@@ -1201,7 +1201,7 @@ int main(void){
      6aa:	cf 92       	push	r12
      6ac:	2a 81       	ldd	r18, Y+2	; 0x02
      6ae:	3b 81       	ldd	r19, Y+3	; 0x03
-     6b0:	28 54       	subi	r18, 0x48	; 72
+     6b0:	2a 59       	subi	r18, 0x9A	; 154
      6b2:	3c 4f       	sbci	r19, 0xFC	; 252
      6b4:	3f 93       	push	r19
      6b6:	2f 93       	push	r18
@@ -1240,7 +1240,7 @@ int main(void){
 			 sprintf(&uartTxBuffer[index], "]\n");
      6e4:	ea 81       	ldd	r30, Y+2	; 0x02
      6e6:	fb 81       	ldd	r31, Y+3	; 0x03
-     6e8:	e8 54       	subi	r30, 0x48	; 72
+     6e8:	ea 59       	subi	r30, 0x9A	; 154
      6ea:	fc 4f       	sbci	r31, 0xFC	; 252
      6ec:	60 82       	st	Z, r6
      6ee:	71 82       	std	Z+1, r7	; 0x01
@@ -1259,8 +1259,8 @@ int main(void){
 		}
 		
 		if (newUartMessages)
-     704:	20 91 df 02 	lds	r18, 0x02DF	; 0x8002df <newUartMessages>
-     708:	30 91 e0 02 	lds	r19, 0x02E0	; 0x8002e0 <newUartMessages+0x1>
+     704:	20 91 8d 02 	lds	r18, 0x028D	; 0x80028d <newUartMessages>
+     708:	30 91 8e 02 	lds	r19, 0x028E	; 0x80028e <newUartMessages+0x1>
      70c:	23 2b       	or	r18, r19
      70e:	09 f4       	brne	.+2      	; 0x712 <main+0x12e>
      710:	99 cf       	rjmp	.-206    	; 0x644 <main+0x60>
@@ -1270,10 +1270,10 @@ int main(void){
 			
 			//Looking for [ and skips it if we find it, error otherwise
 			while(uartRxBuffer[parseIndex] != '[')
-     712:	80 91 e1 02 	lds	r24, 0x02E1	; 0x8002e1 <parseIndex>
-     716:	90 91 e2 02 	lds	r25, 0x02E2	; 0x8002e2 <parseIndex+0x1>
+     712:	80 91 8f 02 	lds	r24, 0x028F	; 0x80028f <parseIndex>
+     716:	90 91 90 02 	lds	r25, 0x0290	; 0x800290 <parseIndex+0x1>
      71a:	fc 01       	movw	r30, r24
-     71c:	e0 51       	subi	r30, 0x10	; 16
+     71c:	e2 56       	subi	r30, 0x62	; 98
      71e:	fd 4f       	sbci	r31, 0xFD	; 253
      720:	20 81       	ld	r18, Z
      722:	2b 35       	cpi	r18, 0x5B	; 91
@@ -1284,8 +1284,8 @@ int main(void){
      728:	68 ec       	ldi	r22, 0xC8	; 200
      72a:	70 e0       	ldi	r23, 0x00	; 0
      72c:	ee d0       	rcall	.+476    	; 0x90a <__divmodhi4>
-     72e:	90 93 e2 02 	sts	0x02E2, r25	; 0x8002e2 <parseIndex+0x1>
-     732:	80 93 e1 02 	sts	0x02E1, r24	; 0x8002e1 <parseIndex>
+     72e:	90 93 90 02 	sts	0x0290, r25	; 0x800290 <parseIndex+0x1>
+     732:	80 93 8f 02 	sts	0x028F, r24	; 0x80028f <parseIndex>
      736:	e1 2c       	mov	r14, r1
      738:	f1 2c       	mov	r15, r1
      73a:	08 ec       	ldi	r16, 0xC8	; 200
@@ -1294,15 +1294,15 @@ int main(void){
      740:	01 96       	adiw	r24, 0x01	; 1
      742:	b8 01       	movw	r22, r16
      744:	e2 d0       	rcall	.+452    	; 0x90a <__divmodhi4>
-     746:	90 93 e2 02 	sts	0x02E2, r25	; 0x8002e2 <parseIndex+0x1>
-     74a:	80 93 e1 02 	sts	0x02E1, r24	; 0x8002e1 <parseIndex>
+     746:	90 93 90 02 	sts	0x0290, r25	; 0x800290 <parseIndex+0x1>
+     74a:	80 93 8f 02 	sts	0x028F, r24	; 0x80028f <parseIndex>
 				if (errorIncrement == RX_BUFFER_SIZE)
      74e:	b7 ec       	ldi	r27, 0xC7	; 199
      750:	eb 16       	cp	r14, r27
      752:	f1 04       	cpc	r15, r1
      754:	29 f4       	brne	.+10     	; 0x760 <main+0x17c>
 				{
-					printf("ERROR, Could not find start of CANmessage in uartRxBuffer\n");
+					printf("ER02\n");
      756:	88 e1       	ldi	r24, 0x18	; 24
      758:	91 e0       	ldi	r25, 0x01	; 1
      75a:	5b d1       	rcall	.+694    	; 0xa12 <puts>
@@ -1316,10 +1316,10 @@ int main(void){
      764:	82 30       	cpi	r24, 0x02	; 2
      766:	58 f0       	brcs	.+22     	; 0x77e <main+0x19a>
 				{
-					printf("ERROR, Looking for [, increment: %u\n", errorIncrement-1);
+					printf("ER01:%u\n", errorIncrement-1);
      768:	ff 92       	push	r15
      76a:	ef 92       	push	r14
-     76c:	a2 e5       	ldi	r26, 0x52	; 82
+     76c:	ad e1       	ldi	r26, 0x1D	; 29
      76e:	b1 e0       	ldi	r27, 0x01	; 1
      770:	bf 93       	push	r27
      772:	af 93       	push	r26
@@ -1337,27 +1337,27 @@ int main(void){
 			
 			//Looking for [ and skips it if we find it, error otherwise
 			while(uartRxBuffer[parseIndex] != '[')
-     784:	80 91 e1 02 	lds	r24, 0x02E1	; 0x8002e1 <parseIndex>
-     788:	90 91 e2 02 	lds	r25, 0x02E2	; 0x8002e2 <parseIndex+0x1>
+     784:	80 91 8f 02 	lds	r24, 0x028F	; 0x80028f <parseIndex>
+     788:	90 91 90 02 	lds	r25, 0x0290	; 0x800290 <parseIndex+0x1>
      78c:	fc 01       	movw	r30, r24
-     78e:	e0 51       	subi	r30, 0x10	; 16
+     78e:	e2 56       	subi	r30, 0x62	; 98
      790:	fd 4f       	sbci	r31, 0xFD	; 253
      792:	20 81       	ld	r18, Z
      794:	2b 35       	cpi	r18, 0x5B	; 91
      796:	a1 f6       	brne	.-88     	; 0x740 <main+0x15c>
-					printf("ERROR, Looking for [, increment: %u\n", errorIncrement-1);
+					printf("ER01:%u\n", errorIncrement-1);
 				}
 				errorIncrement++;
 			}
 			
 			if (error == 0)
-     798:	80 91 de 02 	lds	r24, 0x02DE	; 0x8002de <error>
+     798:	80 91 8c 02 	lds	r24, 0x028C	; 0x80028c <error>
      79c:	81 11       	cpse	r24, r1
      79e:	af c0       	rjmp	.+350    	; 0x8fe <main+0x31a>
 			{
 				parseIndex = (parseIndex + 1) % RX_BUFFER_SIZE;
-     7a0:	80 91 e1 02 	lds	r24, 0x02E1	; 0x8002e1 <parseIndex>
-     7a4:	90 91 e2 02 	lds	r25, 0x02E2	; 0x8002e2 <parseIndex+0x1>
+     7a0:	80 91 8f 02 	lds	r24, 0x028F	; 0x80028f <parseIndex>
+     7a4:	90 91 90 02 	lds	r25, 0x0290	; 0x800290 <parseIndex+0x1>
      7a8:	01 96       	adiw	r24, 0x01	; 1
      7aa:	68 ec       	ldi	r22, 0xC8	; 200
      7ac:	70 e0       	ldi	r23, 0x00	; 0
@@ -1368,7 +1368,7 @@ int main(void){
 				// Setting CAN-ID
 				canId += (ascii_to_dec(uartRxBuffer[parseIndex]) << 8);
      7b2:	fc 01       	movw	r30, r24
-     7b4:	e0 51       	subi	r30, 0x10	; 16
+     7b4:	e2 56       	subi	r30, 0x62	; 98
      7b6:	fd 4f       	sbci	r31, 0xFD	; 253
      7b8:	80 81       	ld	r24, Z
      7ba:	f0 de       	rcall	.-544    	; 0x59c <ascii_to_dec>
@@ -1382,7 +1382,7 @@ int main(void){
      7c8:	8c 01       	movw	r16, r24
 				canId += (ascii_to_dec(uartRxBuffer[parseIndex]) << 4);
      7ca:	fc 01       	movw	r30, r24
-     7cc:	e0 51       	subi	r30, 0x10	; 16
+     7cc:	e2 56       	subi	r30, 0x62	; 98
      7ce:	fd 4f       	sbci	r31, 0xFD	; 253
      7d0:	80 81       	ld	r24, Z
      7d2:	e4 de       	rcall	.-568    	; 0x59c <ascii_to_dec>
@@ -1413,7 +1413,7 @@ int main(void){
      7f2:	8c 01       	movw	r16, r24
 				canId += ascii_to_dec(uartRxBuffer[parseIndex]);
      7f4:	fc 01       	movw	r30, r24
-     7f6:	e0 51       	subi	r30, 0x10	; 16
+     7f6:	e2 56       	subi	r30, 0x62	; 98
      7f8:	fd 4f       	sbci	r31, 0xFD	; 253
      7fa:	80 81       	ld	r24, Z
      7fc:	cf de       	rcall	.-610    	; 0x59c <ascii_to_dec>
@@ -1423,7 +1423,7 @@ int main(void){
 				parseIndex = (parseIndex + 1) % RX_BUFFER_SIZE;
 				//printf("CAN id: %03X\n",canId);
 				txFrame.id = canId;
-     804:	ea ee       	ldi	r30, 0xEA	; 234
+     804:	e8 e9       	ldi	r30, 0x98	; 152
      806:	f3 e0       	ldi	r31, 0x03	; 3
      808:	b1 83       	std	Z+1, r27	; 0x01
      80a:	a0 83       	st	Z, r26
@@ -1452,12 +1452,12 @@ int main(void){
 				//Translating from ASCII and setting length
 				txFrame.length = ascii_to_dec(uartRxBuffer[parseIndex]);
      820:	fc 01       	movw	r30, r24
-     822:	e0 51       	subi	r30, 0x10	; 16
+     822:	e2 56       	subi	r30, 0x62	; 98
      824:	fd 4f       	sbci	r31, 0xFD	; 253
      826:	80 81       	ld	r24, Z
      828:	b9 de       	rcall	.-654    	; 0x59c <ascii_to_dec>
      82a:	28 2f       	mov	r18, r24
-     82c:	80 93 ec 03 	sts	0x03EC, r24	; 0x8003ec <txFrame+0x2>
+     82c:	80 93 9a 03 	sts	0x039A, r24	; 0x80039a <txFrame+0x2>
 				parseIndex = (parseIndex+1) % RX_BUFFER_SIZE;
      830:	c8 01       	movw	r24, r16
      832:	01 96       	adiw	r24, 0x01	; 1
@@ -1475,19 +1475,19 @@ int main(void){
      840:	64 d0       	rcall	.+200    	; 0x90a <__divmodhi4>
      842:	8c 83       	std	Y+4, r24	; 0x04
      844:	9d 83       	std	Y+5, r25	; 0x05
-     846:	80 93 e1 02 	sts	0x02E1, r24	; 0x8002e1 <parseIndex>
-     84a:	90 93 e2 02 	sts	0x02E2, r25	; 0x8002e2 <parseIndex+0x1>
+     846:	80 93 8f 02 	sts	0x028F, r24	; 0x80028f <parseIndex>
+     84a:	90 93 90 02 	sts	0x0290, r25	; 0x800290 <parseIndex+0x1>
 				
 				//Setting data
 				for (int i = 0; i < txFrame.length; i++)
      84e:	22 23       	and	r18, r18
      850:	d1 f1       	breq	.+116    	; 0x8c6 <main+0x2e2>
-     852:	0d ee       	ldi	r16, 0xED	; 237
+     852:	0b e9       	ldi	r16, 0x9B	; 155
      854:	13 e0       	ldi	r17, 0x03	; 3
      856:	82 2f       	mov	r24, r18
      858:	90 e0       	ldi	r25, 0x00	; 0
      85a:	9c 01       	movw	r18, r24
-     85c:	23 51       	subi	r18, 0x13	; 19
+     85c:	25 56       	subi	r18, 0x65	; 101
      85e:	3c 4f       	sbci	r19, 0xFC	; 252
      860:	79 01       	movw	r14, r18
 				{
@@ -1504,7 +1504,7 @@ int main(void){
 					canData = (ascii_to_dec(uartRxBuffer[parseIndex]) << 4);
      868:	ec 81       	ldd	r30, Y+4	; 0x04
      86a:	fd 81       	ldd	r31, Y+5	; 0x05
-     86c:	e0 51       	subi	r30, 0x10	; 16
+     86c:	e2 56       	subi	r30, 0x62	; 98
      86e:	fd 4f       	sbci	r31, 0xFD	; 253
      870:	80 81       	ld	r24, Z
      872:	94 de       	rcall	.-728    	; 0x59c <ascii_to_dec>
@@ -1525,7 +1525,7 @@ int main(void){
 					
 					canData |= (ascii_to_dec(uartRxBuffer[parseIndex]));
      88e:	fc 01       	movw	r30, r24
-     890:	e0 51       	subi	r30, 0x10	; 16
+     890:	e2 56       	subi	r30, 0x62	; 98
      892:	fd 4f       	sbci	r31, 0xFD	; 253
      894:	80 81       	ld	r24, Z
      896:	82 de       	rcall	.-764    	; 0x59c <ascii_to_dec>
@@ -1564,16 +1564,16 @@ int main(void){
      8b8:	9d 2c       	mov	r9, r13
      8ba:	ca 80       	ldd	r12, Y+2	; 0x02
      8bc:	db 80       	ldd	r13, Y+3	; 0x03
-     8be:	90 93 e2 02 	sts	0x02E2, r25	; 0x8002e2 <parseIndex+0x1>
-     8c2:	80 93 e1 02 	sts	0x02E1, r24	; 0x8002e1 <parseIndex>
+     8be:	90 93 90 02 	sts	0x0290, r25	; 0x800290 <parseIndex+0x1>
+     8c2:	80 93 8f 02 	sts	0x028F, r24	; 0x80028f <parseIndex>
 					txFrame.data[i] = canData;
 					//printf("Can Data %d: %02X\n", i, txFrame.data[i]);
 				}
 				
 				//Jump over ]
 				parseIndex = (parseIndex+1) % RX_BUFFER_SIZE;
-     8c6:	80 91 e1 02 	lds	r24, 0x02E1	; 0x8002e1 <parseIndex>
-     8ca:	90 91 e2 02 	lds	r25, 0x02E2	; 0x8002e2 <parseIndex+0x1>
+     8c6:	80 91 8f 02 	lds	r24, 0x028F	; 0x80028f <parseIndex>
+     8ca:	90 91 90 02 	lds	r25, 0x0290	; 0x800290 <parseIndex+0x1>
      8ce:	01 96       	adiw	r24, 0x01	; 1
      8d0:	28 ec       	ldi	r18, 0xC8	; 200
      8d2:	30 e0       	ldi	r19, 0x00	; 0
@@ -1584,24 +1584,24 @@ int main(void){
      8d8:	01 96       	adiw	r24, 0x01	; 1
      8da:	b9 01       	movw	r22, r18
      8dc:	16 d0       	rcall	.+44     	; 0x90a <__divmodhi4>
-     8de:	90 93 e2 02 	sts	0x02E2, r25	; 0x8002e2 <parseIndex+0x1>
-     8e2:	80 93 e1 02 	sts	0x02E1, r24	; 0x8002e1 <parseIndex>
+     8de:	90 93 90 02 	sts	0x0290, r25	; 0x800290 <parseIndex+0x1>
+     8e2:	80 93 8f 02 	sts	0x028F, r24	; 0x80028f <parseIndex>
 				
 				can_send_message(&txFrame);
-     8e6:	8a ee       	ldi	r24, 0xEA	; 234
+     8e6:	88 e9       	ldi	r24, 0x98	; 152
      8e8:	93 e0       	ldi	r25, 0x03	; 3
      8ea:	7c dd       	rcall	.-1288   	; 0x3e4 <can_send_message>
 				newUartMessages-- ;	
-     8ec:	80 91 df 02 	lds	r24, 0x02DF	; 0x8002df <newUartMessages>
-     8f0:	90 91 e0 02 	lds	r25, 0x02E0	; 0x8002e0 <newUartMessages+0x1>
+     8ec:	80 91 8d 02 	lds	r24, 0x028D	; 0x80028d <newUartMessages>
+     8f0:	90 91 8e 02 	lds	r25, 0x028E	; 0x80028e <newUartMessages+0x1>
      8f4:	01 97       	sbiw	r24, 0x01	; 1
-     8f6:	90 93 e0 02 	sts	0x02E0, r25	; 0x8002e0 <newUartMessages+0x1>
-     8fa:	80 93 df 02 	sts	0x02DF, r24	; 0x8002df <newUartMessages>
+     8f6:	90 93 8e 02 	sts	0x028E, r25	; 0x80028e <newUartMessages+0x1>
+     8fa:	80 93 8d 02 	sts	0x028D, r24	; 0x80028d <newUartMessages>
 			}
 			error--;
-     8fe:	80 91 de 02 	lds	r24, 0x02DE	; 0x8002de <error>
+     8fe:	80 91 8c 02 	lds	r24, 0x028C	; 0x80028c <error>
      902:	81 50       	subi	r24, 0x01	; 1
-     904:	80 93 de 02 	sts	0x02DE, r24	; 0x8002de <error>
+     904:	80 93 8c 02 	sts	0x028C, r24	; 0x80028c <error>
      908:	9d ce       	rjmp	.-710    	; 0x644 <main+0x60>
 
 0000090a <__divmodhi4>:
@@ -1689,12 +1689,12 @@ int main(void){
      990:	02 87       	std	Z+10, r16	; 0x0a
      992:	81 e8       	ldi	r24, 0x81	; 129
      994:	83 83       	std	Z+3, r24	; 0x03
-     996:	80 91 f5 03 	lds	r24, 0x03F5	; 0x8003f5 <__iob>
-     99a:	90 91 f6 03 	lds	r25, 0x03F6	; 0x8003f6 <__iob+0x1>
+     996:	80 91 a3 03 	lds	r24, 0x03A3	; 0x8003a3 <__iob>
+     99a:	90 91 a4 03 	lds	r25, 0x03A4	; 0x8003a4 <__iob+0x1>
      99e:	89 2b       	or	r24, r25
      9a0:	21 f4       	brne	.+8      	; 0x9aa <fdevopen+0x52>
-     9a2:	f0 93 f6 03 	sts	0x03F6, r31	; 0x8003f6 <__iob+0x1>
-     9a6:	e0 93 f5 03 	sts	0x03F5, r30	; 0x8003f5 <__iob>
+     9a2:	f0 93 a4 03 	sts	0x03A4, r31	; 0x8003a4 <__iob+0x1>
+     9a6:	e0 93 a3 03 	sts	0x03A3, r30	; 0x8003a3 <__iob>
      9aa:	20 97       	sbiw	r28, 0x00	; 0
      9ac:	c9 f0       	breq	.+50     	; 0x9e0 <fdevopen+0x88>
      9ae:	d1 87       	std	Z+9, r29	; 0x09
@@ -1702,18 +1702,18 @@ int main(void){
      9b2:	83 81       	ldd	r24, Z+3	; 0x03
      9b4:	82 60       	ori	r24, 0x02	; 2
      9b6:	83 83       	std	Z+3, r24	; 0x03
-     9b8:	80 91 f7 03 	lds	r24, 0x03F7	; 0x8003f7 <__iob+0x2>
-     9bc:	90 91 f8 03 	lds	r25, 0x03F8	; 0x8003f8 <__iob+0x3>
+     9b8:	80 91 a5 03 	lds	r24, 0x03A5	; 0x8003a5 <__iob+0x2>
+     9bc:	90 91 a6 03 	lds	r25, 0x03A6	; 0x8003a6 <__iob+0x3>
      9c0:	89 2b       	or	r24, r25
      9c2:	71 f4       	brne	.+28     	; 0x9e0 <fdevopen+0x88>
-     9c4:	f0 93 f8 03 	sts	0x03F8, r31	; 0x8003f8 <__iob+0x3>
-     9c8:	e0 93 f7 03 	sts	0x03F7, r30	; 0x8003f7 <__iob+0x2>
-     9cc:	80 91 f9 03 	lds	r24, 0x03F9	; 0x8003f9 <__iob+0x4>
-     9d0:	90 91 fa 03 	lds	r25, 0x03FA	; 0x8003fa <__iob+0x5>
+     9c4:	f0 93 a6 03 	sts	0x03A6, r31	; 0x8003a6 <__iob+0x3>
+     9c8:	e0 93 a5 03 	sts	0x03A5, r30	; 0x8003a5 <__iob+0x2>
+     9cc:	80 91 a7 03 	lds	r24, 0x03A7	; 0x8003a7 <__iob+0x4>
+     9d0:	90 91 a8 03 	lds	r25, 0x03A8	; 0x8003a8 <__iob+0x5>
      9d4:	89 2b       	or	r24, r25
      9d6:	21 f4       	brne	.+8      	; 0x9e0 <fdevopen+0x88>
-     9d8:	f0 93 fa 03 	sts	0x03FA, r31	; 0x8003fa <__iob+0x5>
-     9dc:	e0 93 f9 03 	sts	0x03F9, r30	; 0x8003f9 <__iob+0x4>
+     9d8:	f0 93 a8 03 	sts	0x03A8, r31	; 0x8003a8 <__iob+0x5>
+     9dc:	e0 93 a7 03 	sts	0x03A7, r30	; 0x8003a7 <__iob+0x4>
      9e0:	cf 01       	movw	r24, r30
      9e2:	df 91       	pop	r29
      9e4:	cf 91       	pop	r28
@@ -1733,8 +1733,8 @@ int main(void){
      9fc:	61 91       	ld	r22, Z+
      9fe:	71 91       	ld	r23, Z+
      a00:	af 01       	movw	r20, r30
-     a02:	80 91 f7 03 	lds	r24, 0x03F7	; 0x8003f7 <__iob+0x2>
-     a06:	90 91 f8 03 	lds	r25, 0x03F8	; 0x8003f8 <__iob+0x3>
+     a02:	80 91 a5 03 	lds	r24, 0x03A5	; 0x8003a5 <__iob+0x2>
+     a06:	90 91 a6 03 	lds	r25, 0x03A6	; 0x8003a6 <__iob+0x3>
      a0a:	62 d0       	rcall	.+196    	; 0xad0 <vfprintf>
      a0c:	df 91       	pop	r29
      a0e:	cf 91       	pop	r28
@@ -1745,8 +1745,8 @@ int main(void){
      a14:	1f 93       	push	r17
      a16:	cf 93       	push	r28
      a18:	df 93       	push	r29
-     a1a:	e0 91 f7 03 	lds	r30, 0x03F7	; 0x8003f7 <__iob+0x2>
-     a1e:	f0 91 f8 03 	lds	r31, 0x03F8	; 0x8003f8 <__iob+0x3>
+     a1a:	e0 91 a5 03 	lds	r30, 0x03A5	; 0x8003a5 <__iob+0x2>
+     a1e:	f0 91 a6 03 	lds	r31, 0x03A6	; 0x8003a6 <__iob+0x3>
      a22:	23 81       	ldd	r18, Z+3	; 0x03
      a24:	21 ff       	sbrs	r18, 1
      a26:	1b c0       	rjmp	.+54     	; 0xa5e <puts+0x4c>
@@ -1756,8 +1756,8 @@ int main(void){
      a2e:	f8 01       	movw	r30, r16
      a30:	81 91       	ld	r24, Z+
      a32:	8f 01       	movw	r16, r30
-     a34:	60 91 f7 03 	lds	r22, 0x03F7	; 0x8003f7 <__iob+0x2>
-     a38:	70 91 f8 03 	lds	r23, 0x03F8	; 0x8003f8 <__iob+0x3>
+     a34:	60 91 a5 03 	lds	r22, 0x03A5	; 0x8003a5 <__iob+0x2>
+     a38:	70 91 a6 03 	lds	r23, 0x03A6	; 0x8003a6 <__iob+0x3>
      a3c:	db 01       	movw	r26, r22
      a3e:	18 96       	adiw	r26, 0x08	; 8
      a40:	ed 91       	ld	r30, X+
@@ -2367,8 +2367,8 @@ int main(void){
      ee8:	10 f4       	brcc	.+4      	; 0xeee <malloc+0xe>
      eea:	82 e0       	ldi	r24, 0x02	; 2
      eec:	90 e0       	ldi	r25, 0x00	; 0
-     eee:	e0 91 fd 03 	lds	r30, 0x03FD	; 0x8003fd <__flp>
-     ef2:	f0 91 fe 03 	lds	r31, 0x03FE	; 0x8003fe <__flp+0x1>
+     eee:	e0 91 ab 03 	lds	r30, 0x03AB	; 0x8003ab <__flp>
+     ef2:	f0 91 ac 03 	lds	r31, 0x03AC	; 0x8003ac <__flp+0x1>
      ef6:	20 e0       	ldi	r18, 0x00	; 0
      ef8:	30 e0       	ldi	r19, 0x00	; 0
      efa:	c0 e0       	ldi	r28, 0x00	; 0
@@ -2390,8 +2390,8 @@ int main(void){
      f1a:	9b 83       	std	Y+3, r25	; 0x03
      f1c:	8a 83       	std	Y+2, r24	; 0x02
      f1e:	2b c0       	rjmp	.+86     	; 0xf76 <malloc+0x96>
-     f20:	90 93 fe 03 	sts	0x03FE, r25	; 0x8003fe <__flp+0x1>
-     f24:	80 93 fd 03 	sts	0x03FD, r24	; 0x8003fd <__flp>
+     f20:	90 93 ac 03 	sts	0x03AC, r25	; 0x8003ac <__flp+0x1>
+     f24:	80 93 ab 03 	sts	0x03AB, r24	; 0x8003ab <__flp>
      f28:	26 c0       	rjmp	.+76     	; 0xf76 <malloc+0x96>
      f2a:	21 15       	cp	r18, r1
      f2c:	31 05       	cpc	r19, r1
@@ -2426,8 +2426,8 @@ int main(void){
      f66:	93 83       	std	Z+3, r25	; 0x03
      f68:	82 83       	std	Z+2, r24	; 0x02
      f6a:	04 c0       	rjmp	.+8      	; 0xf74 <malloc+0x94>
-     f6c:	90 93 fe 03 	sts	0x03FE, r25	; 0x8003fe <__flp+0x1>
-     f70:	80 93 fd 03 	sts	0x03FD, r24	; 0x8003fd <__flp>
+     f6c:	90 93 ac 03 	sts	0x03AC, r25	; 0x8003ac <__flp+0x1>
+     f70:	80 93 ab 03 	sts	0x03AB, r24	; 0x8003ab <__flp>
      f74:	fd 01       	movw	r30, r26
      f76:	32 96       	adiw	r30, 0x02	; 2
      f78:	44 c0       	rjmp	.+136    	; 0x1002 <malloc+0x122>
@@ -2441,14 +2441,14 @@ int main(void){
      f88:	2d 93       	st	X+, r18
      f8a:	3c 93       	st	X, r19
      f8c:	3a c0       	rjmp	.+116    	; 0x1002 <malloc+0x122>
-     f8e:	20 91 fb 03 	lds	r18, 0x03FB	; 0x8003fb <__brkval>
-     f92:	30 91 fc 03 	lds	r19, 0x03FC	; 0x8003fc <__brkval+0x1>
+     f8e:	20 91 a9 03 	lds	r18, 0x03A9	; 0x8003a9 <__brkval>
+     f92:	30 91 aa 03 	lds	r19, 0x03AA	; 0x8003aa <__brkval+0x1>
      f96:	23 2b       	or	r18, r19
      f98:	41 f4       	brne	.+16     	; 0xfaa <malloc+0xca>
      f9a:	20 91 02 01 	lds	r18, 0x0102	; 0x800102 <__malloc_heap_start>
      f9e:	30 91 03 01 	lds	r19, 0x0103	; 0x800103 <__malloc_heap_start+0x1>
-     fa2:	30 93 fc 03 	sts	0x03FC, r19	; 0x8003fc <__brkval+0x1>
-     fa6:	20 93 fb 03 	sts	0x03FB, r18	; 0x8003fb <__brkval>
+     fa2:	30 93 aa 03 	sts	0x03AA, r19	; 0x8003aa <__brkval+0x1>
+     fa6:	20 93 a9 03 	sts	0x03A9, r18	; 0x8003a9 <__brkval>
      faa:	20 91 00 01 	lds	r18, 0x0100	; 0x800100 <__data_start>
      fae:	30 91 01 01 	lds	r19, 0x0101	; 0x800101 <__data_start+0x1>
      fb2:	21 15       	cp	r18, r1
@@ -2460,8 +2460,8 @@ int main(void){
      fc0:	50 91 05 01 	lds	r21, 0x0105	; 0x800105 <__malloc_margin+0x1>
      fc4:	24 1b       	sub	r18, r20
      fc6:	35 0b       	sbc	r19, r21
-     fc8:	e0 91 fb 03 	lds	r30, 0x03FB	; 0x8003fb <__brkval>
-     fcc:	f0 91 fc 03 	lds	r31, 0x03FC	; 0x8003fc <__brkval+0x1>
+     fc8:	e0 91 a9 03 	lds	r30, 0x03A9	; 0x8003a9 <__brkval>
+     fcc:	f0 91 aa 03 	lds	r31, 0x03AA	; 0x8003aa <__brkval+0x1>
      fd0:	e2 17       	cp	r30, r18
      fd2:	f3 07       	cpc	r31, r19
      fd4:	a0 f4       	brcc	.+40     	; 0xffe <malloc+0x11e>
@@ -2478,8 +2478,8 @@ int main(void){
      fea:	48 f0       	brcs	.+18     	; 0xffe <malloc+0x11e>
      fec:	4e 0f       	add	r20, r30
      fee:	5f 1f       	adc	r21, r31
-     ff0:	50 93 fc 03 	sts	0x03FC, r21	; 0x8003fc <__brkval+0x1>
-     ff4:	40 93 fb 03 	sts	0x03FB, r20	; 0x8003fb <__brkval>
+     ff0:	50 93 aa 03 	sts	0x03AA, r21	; 0x8003aa <__brkval+0x1>
+     ff4:	40 93 a9 03 	sts	0x03A9, r20	; 0x8003a9 <__brkval>
      ff8:	81 93       	st	Z+, r24
      ffa:	91 93       	st	Z+, r25
      ffc:	02 c0       	rjmp	.+4      	; 0x1002 <malloc+0x122>
@@ -2502,8 +2502,8 @@ int main(void){
     101a:	32 97       	sbiw	r30, 0x02	; 2
     101c:	13 82       	std	Z+3, r1	; 0x03
     101e:	12 82       	std	Z+2, r1	; 0x02
-    1020:	00 91 fd 03 	lds	r16, 0x03FD	; 0x8003fd <__flp>
-    1024:	10 91 fe 03 	lds	r17, 0x03FE	; 0x8003fe <__flp+0x1>
+    1020:	00 91 ab 03 	lds	r16, 0x03AB	; 0x8003ab <__flp>
+    1024:	10 91 ac 03 	lds	r17, 0x03AC	; 0x8003ac <__flp+0x1>
     1028:	01 15       	cp	r16, r1
     102a:	11 05       	cpc	r17, r1
     102c:	81 f4       	brne	.+32     	; 0x104e <free+0x44>
@@ -2511,13 +2511,13 @@ int main(void){
     1030:	31 81       	ldd	r19, Z+1	; 0x01
     1032:	82 0f       	add	r24, r18
     1034:	93 1f       	adc	r25, r19
-    1036:	20 91 fb 03 	lds	r18, 0x03FB	; 0x8003fb <__brkval>
-    103a:	30 91 fc 03 	lds	r19, 0x03FC	; 0x8003fc <__brkval+0x1>
+    1036:	20 91 a9 03 	lds	r18, 0x03A9	; 0x8003a9 <__brkval>
+    103a:	30 91 aa 03 	lds	r19, 0x03AA	; 0x8003aa <__brkval+0x1>
     103e:	28 17       	cp	r18, r24
     1040:	39 07       	cpc	r19, r25
     1042:	79 f5       	brne	.+94     	; 0x10a2 <free+0x98>
-    1044:	f0 93 fc 03 	sts	0x03FC, r31	; 0x8003fc <__brkval+0x1>
-    1048:	e0 93 fb 03 	sts	0x03FB, r30	; 0x8003fb <__brkval>
+    1044:	f0 93 aa 03 	sts	0x03AA, r31	; 0x8003aa <__brkval+0x1>
+    1048:	e0 93 a9 03 	sts	0x03A9, r30	; 0x8003a9 <__brkval>
     104c:	71 c0       	rjmp	.+226    	; 0x1130 <__stack+0x31>
     104e:	d8 01       	movw	r26, r16
     1050:	40 e0       	ldi	r20, 0x00	; 0
@@ -2561,8 +2561,8 @@ int main(void){
     109c:	82 83       	std	Z+2, r24	; 0x02
     109e:	45 2b       	or	r20, r21
     10a0:	29 f4       	brne	.+10     	; 0x10ac <free+0xa2>
-    10a2:	f0 93 fe 03 	sts	0x03FE, r31	; 0x8003fe <__flp+0x1>
-    10a6:	e0 93 fd 03 	sts	0x03FD, r30	; 0x8003fd <__flp>
+    10a2:	f0 93 ac 03 	sts	0x03AC, r31	; 0x8003ac <__flp+0x1>
+    10a6:	e0 93 ab 03 	sts	0x03AB, r30	; 0x8003ab <__flp>
     10aa:	42 c0       	rjmp	.+132    	; 0x1130 <__stack+0x31>
     10ac:	13 96       	adiw	r26, 0x03	; 3
     10ae:	fc 93       	st	X, r31
@@ -2610,20 +2610,20 @@ int main(void){
     1102:	3f 4f       	sbci	r19, 0xFF	; 255
     1104:	82 0f       	add	r24, r18
     1106:	93 1f       	adc	r25, r19
-    1108:	20 91 fb 03 	lds	r18, 0x03FB	; 0x8003fb <__brkval>
-    110c:	30 91 fc 03 	lds	r19, 0x03FC	; 0x8003fc <__brkval+0x1>
+    1108:	20 91 a9 03 	lds	r18, 0x03A9	; 0x8003a9 <__brkval>
+    110c:	30 91 aa 03 	lds	r19, 0x03AA	; 0x8003aa <__brkval+0x1>
     1110:	28 17       	cp	r18, r24
     1112:	39 07       	cpc	r19, r25
     1114:	69 f4       	brne	.+26     	; 0x1130 <__stack+0x31>
     1116:	30 97       	sbiw	r30, 0x00	; 0
     1118:	29 f4       	brne	.+10     	; 0x1124 <__stack+0x25>
-    111a:	10 92 fe 03 	sts	0x03FE, r1	; 0x8003fe <__flp+0x1>
-    111e:	10 92 fd 03 	sts	0x03FD, r1	; 0x8003fd <__flp>
+    111a:	10 92 ac 03 	sts	0x03AC, r1	; 0x8003ac <__flp+0x1>
+    111e:	10 92 ab 03 	sts	0x03AB, r1	; 0x8003ab <__flp>
     1122:	02 c0       	rjmp	.+4      	; 0x1128 <__stack+0x29>
     1124:	13 82       	std	Z+3, r1	; 0x03
     1126:	12 82       	std	Z+2, r1	; 0x02
-    1128:	10 93 fc 03 	sts	0x03FC, r17	; 0x8003fc <__brkval+0x1>
-    112c:	00 93 fb 03 	sts	0x03FB, r16	; 0x8003fb <__brkval>
+    1128:	10 93 aa 03 	sts	0x03AA, r17	; 0x8003aa <__brkval+0x1>
+    112c:	00 93 a9 03 	sts	0x03A9, r16	; 0x8003a9 <__brkval>
     1130:	df 91       	pop	r29
     1132:	cf 91       	pop	r28
     1134:	1f 91       	pop	r17
